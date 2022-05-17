@@ -185,8 +185,8 @@ public class Exercises {
         20. A bee has 6 legs. How many legs do 8 bees have?
         */
 		int numOfBeeLegs = 6;
-		int numberOfBees = 8
-		int totalNumOfBeeLegs = numOfBeeLegs * numberOfBees;
+		int numOfBees = 8;
+		int totalNumOfBeeLegs = numOfBeeLegs * numOfBees;
 		System.out.println(totalNumOfBeeLegs);
 
         /* Exercise 21
