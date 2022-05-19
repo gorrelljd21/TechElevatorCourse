@@ -24,7 +24,14 @@ public class Exercise06_ElectricBill {
     calculateElectricBill(110) ➔ 22.5
      */
     public double calculateElectricBill(double unitsUsed) {
-        return 0;
+        double price = 0;
+
+        if(unitsUsed <= EXCESS_UNITS_LIMIT) {
+            price = BASE_RATE * unitsUsed;
+        } else {
+            price = ((unitsUsed - EXCESS_UNITS_LIMIT) * EXCESS_RATE) + (EXCESS_UNITS_LIMIT * BASE_RATE);
+        }
+        return price;
     }
 
     /*
@@ -39,7 +46,17 @@ public class Exercise06_ElectricBill {
     calculateElectricBill(110, true) ➔ 21.375
      */
     public double calculateElectricBill(double unitsUsed, boolean hasRenewableEnergy) {
-        return 0;
+        double price = 0;
+
+        if(unitsUsed <= EXCESS_UNITS_LIMIT) {
+            price = BASE_RATE * unitsUsed;
+        } else {
+            price = ((unitsUsed - EXCESS_UNITS_LIMIT) * EXCESS_RATE) + (EXCESS_UNITS_LIMIT * BASE_RATE);
+        }
+        if (hasRenewableEnergy) {
+            price = price * DISCOUNT_FACTOR;
+        }
+        return price;
     }
 
     /*
@@ -64,6 +81,22 @@ public class Exercise06_ElectricBill {
     calculateElectricBill(110, 120) ➔ -2.0
      */
     public double calculateElectricBill(double unitsUsed, double unitsReturned) {
-        return 0;
+        double price = 0;
+        boolean hasRenewableEnergy = unitsReturned > 0;
+        double moneyGivenBack = 0.20;
+        double netUsage = unitsUsed - unitsReturned;
+
+        if(netUsage <= EXCESS_UNITS_LIMIT) {
+            price = BASE_RATE * netUsage;
+        } else {
+            price = ((netUsage - EXCESS_UNITS_LIMIT) * EXCESS_RATE) + (EXCESS_UNITS_LIMIT * BASE_RATE);
+        }
+        if (hasRenewableEnergy) {
+            price = price * DISCOUNT_FACTOR;
+        }
+        if (unitsReturned > unitsUsed) {
+            price = moneyGivenBack * (unitsUsed - unitsReturned); //credit is a neg price
+        }
+        return price;
     }
 }

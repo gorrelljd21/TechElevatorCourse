@@ -32,6 +32,12 @@ public class Exercise07_StoreHours {
     isStoreOpen(22) ➔ false
      */
     public boolean isStoreOpen(int currentHour) {
+        int openTime = 8;
+        int closingTime = 17;
+
+        if (currentHour >= openTime && currentHour < closingTime) {
+            return true;
+        }
         return false;
     }
 
@@ -54,6 +60,14 @@ public class Exercise07_StoreHours {
     isStoreOpen(12, 'S') ➔ false
      */
     public boolean isStoreOpen(int currentHour, char currentDay) {
+        int openTime = 8;
+        int closingTime = 17;
+
+        if (currentHour >= openTime && currentHour < closingTime) {
+            if (currentDay == 'M' || currentDay == 'W' || currentDay == 'F') {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -70,6 +84,33 @@ public class Exercise07_StoreHours {
     isStoreOpen(9, 'S', true) ➔ true
      */
     public boolean isStoreOpen(int currentHour, char currentDay, boolean isSummer) {
+        int openTimeNotSummer = 8;
+        int closingTimeNotSummer = 17;
+        int openTimeSummerWed = 8;
+        int closingTimeSummerWed = 20;
+        int openTimeSummerSat = 9;
+        int closingTimeSummerSat = 15;
+
+        if (currentHour >= openTimeNotSummer && currentHour < closingTimeNotSummer) {
+            if (currentDay == 'M' || currentDay == 'W' || currentDay == 'F') {
+                return true;
+            }
+        }
+        if (isSummer && (currentDay == 'M' || currentDay == 'W' || currentDay == 'F' || currentDay == 'S')) { //if its any of these days its open and its summer
+            if (currentDay == 'W') {
+                if (currentHour >= openTimeSummerWed && currentHour < closingTimeSummerWed) {
+                    return true;
+                }
+            } else if (currentDay == 'S') {
+                if (currentHour >= openTimeSummerSat && currentHour < closingTimeSummerSat) {
+                    return true;
+                }
+            } else {
+                if (currentHour >= openTimeNotSummer && currentHour < closingTimeNotSummer) {
+                  return true;
+                }
+            }
+        }
         return false;
     }
 }

@@ -1,5 +1,7 @@
 package com.techelevator;
 
+import java.awt.*;
+
 public class Exercise04_HotelReservation {
 
     /*
@@ -24,7 +26,17 @@ public class Exercise04_HotelReservation {
     calculateStayTotal(3) ➔ 269.97
      */
     public double calculateStayTotal(int numberOfNights) {
-        return 0;
+        double price = 0;
+        double twoDaysOrLess = DAILY_RATE * numberOfNights;
+        double moreThanThreeDays = DISCOUNT_RATE * numberOfNights;
+        int maxDaysOnDailyRate = 2;
+
+        if (numberOfNights <= maxDaysOnDailyRate) {
+            price = twoDaysOrLess;
+        } else {
+            price = moreThanThreeDays;
+        }
+        return price;
     }
 
     /*
@@ -42,8 +54,30 @@ public class Exercise04_HotelReservation {
     calculateStayTotal(3, 2) ➔ 289.97
      */
     public double calculateStayTotal(int numOfTotalNights, int numOfWeekendNights) {
-        return 0;
+        double price = 0;
+        double weekendRate = 99.99;
+        int maxDaysOnDailyRate = 2;
+        int daysForDiscountRate = 3;
+        double numOfWeekNights = numOfTotalNights - numOfWeekendNights;
+
+        if (numOfTotalNights >= daysForDiscountRate) {
+            price = (numOfWeekNights * DISCOUNT_RATE) + (numOfWeekendNights * weekendRate);
+        } else if (numOfTotalNights <= maxDaysOnDailyRate) {
+            price = (numOfWeekNights * DAILY_RATE) + (numOfWeekendNights * weekendRate);
+        }
+        return price;
     }
+
+//
+//                <= maxDaysOnDailyRate) {
+//            price = DAILY_RATE;
+//        } if (numOfTotalNights >= daysForDiscountRate) {
+//            price = DISCOUNT_RATE;
+//        } if (numOfWeekendNights >= 0 || numOfWeekendNights <= 2) {
+//            price = price + (weekendRate * numOfWeekendNights);
+//        }
+//        return price;
+//    }
 
     /*
     Innovator's Inn continues to grow in popularity and now offers a rewards program to its customers.
@@ -60,6 +94,19 @@ public class Exercise04_HotelReservation {
     calculateStayTotal(3, 1, true) ➔ 269.97
      */
     public double calculateStayTotal(int numOfTotalNights, int numOfWeekendNights, boolean isRewardsMember) {
-        return 0;
+        double price = 0;
+        double weekendRate = 99.99;
+        int maxDaysOnDailyRate = 2;
+        int daysForDiscountRate = 3;
+        double numOfWeekNights = numOfTotalNights - numOfWeekendNights;
+
+        if (isRewardsMember) {
+            price = numOfTotalNights * DISCOUNT_RATE;
+        } else if (numOfTotalNights >= daysForDiscountRate) {
+            price = (numOfWeekNights * DISCOUNT_RATE) + (numOfWeekendNights * weekendRate);
+        } else {
+            price = (numOfWeekNights * DAILY_RATE) + (numOfWeekendNights * weekendRate);
+        }
+        return price;
     }
 }
