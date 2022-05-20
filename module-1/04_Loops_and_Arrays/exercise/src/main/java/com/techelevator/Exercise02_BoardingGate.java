@@ -24,8 +24,13 @@ public class Exercise02_BoardingGate {
     generateSeatingChart(2) → [true, true]
      */
     public boolean[] generateSeatingChart(int numberOfSeats) {
-        return new boolean[] {};
+        boolean[] seatingChart = new boolean[numberOfSeats];
+        for (int i = 0; i < numberOfSeats; i++) {
+            seatingChart[i] = true;
+        }
+        return seatingChart;
     }
+
 
     /*
     Once passengers begin boarding the plane, gate attendants need a way to determine how many available
@@ -41,7 +46,13 @@ public class Exercise02_BoardingGate {
     getAvailableSeatCount([]) → 0
      */
     public int getAvailableSeatCount(boolean[] seatingChart) {
-        return 0;
+        int numberOfOpenSeats = 0;
+        for (int i = 0; i < seatingChart.length; i++) {
+            if(seatingChart[i]) {
+                numberOfOpenSeats++;
+            }
+        }
+        return numberOfOpenSeats;
     }
 
     /*
@@ -51,13 +62,19 @@ public class Exercise02_BoardingGate {
     Using the boolean array, implement the logic to count the number of full rows on the plane.
     Note: A new row starts at every third element. For example, row one begins with index 0, row two begins with index 3, and so on.
 
-    Examples:
+    Examples: every 3 values reps a row (s,s,s)(s,s,s)
     getNumberOfFullRows([false, false, false, true, true, true]) → 1
-    getNumberOfFullRows([true, true, true, true, true, true]) → 2
+    getNumberOfFullRows([true, true, true, true, true, true]) → 0
     getNumberOfFullRows([false, true, true, false, true, true]) → 0
      */
     public int getNumberOfFullRows(boolean[] seatingChart) {
-        return 0;
+        int numberOfFullRows = 0;
+        for (int i = 0; i < seatingChart.length; i+=3) {
+            if (!seatingChart[i] && !seatingChart[i+1] && !seatingChart[i+2]) {
+                numberOfFullRows++;
+            }
+        }
+        return numberOfFullRows;
     }
 
 }

@@ -25,13 +25,20 @@ public class Exercise05_Weather {
 	belowFreezing([]) → 0
     */
 	public int belowFreezing(int[] dailyHighs) {
-		return 0;
+		int belowFreezingDays = 0;
+
+        for(int i = 0; i < dailyHighs.length; i++) {
+            if(dailyHighs[i] <= 32){
+                belowFreezingDays++;
+            }
+        }
+        return belowFreezingDays;
 	}
 
     /*
     GaleForce also needs to determine the hottest day when given an upcoming forecast.
 
-    Given an array of high temperatures, determine the hottest day.
+    Given an array of high temperatures, determine the hottest day. Find the largest value in array.
 
     Note: The array of high temperatures is guaranteed to have at least one
     element.
@@ -43,7 +50,14 @@ public class Exercise05_Weather {
 	hottestDay([55]) → 55
     */
     public int hottestDay(int[] dailyHighs) {
-        return 0;
+        int highestNumber = -12345;
+
+        for(int i = 0; i < dailyHighs.length; i++) {
+            if(highestNumber < dailyHighs[i]) {
+                highestNumber = dailyHighs[i];
+            }
+        }
+        return highestNumber;
     }
 
     /*
@@ -61,6 +75,15 @@ public class Exercise05_Weather {
 	fixTemperatures([]) → []
      */
     public int[] fixTemperatures(int[] temperatures) {
-        return new int[] {};
+       int[] newTemps = new int[temperatures.length];
+
+        for(int i = 0; i < temperatures.length; i++) {
+            if(i % 2 == 0) {
+                newTemps[i] = temperatures[i] + 2;
+            } else {
+                newTemps[i] = temperatures[i];
+            }
+        }
+        return newTemps;
     }
 }
