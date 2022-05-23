@@ -17,17 +17,15 @@ public class Fibonacci {
 //		System.out.println(firstFib);
 //		System.out.println(secondFib);
 //		System.out.println(thirdFib);
-
+		System.out.print("0, 1, 1");
 
 		while(thirdFib < userInput) {
 			firstFib = secondFib;
 			secondFib = thirdFib;
 			thirdFib = firstFib + secondFib;
-			System.out.printf("0, 1, %s ",thirdFib);
+			if(thirdFib <= userInput){
+				System.out.printf(", %s", thirdFib);
+			}
 		}
-
-
-
-
 	}
 }

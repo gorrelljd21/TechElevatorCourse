@@ -15,11 +15,11 @@ public class TempConvert {
         String inputDeg = scanner.nextLine();
 
         if (inputDeg.equals("F")) {
-            Double temperatureCelsius = ((double)inputTemp - 32) / 1.8;
+            Double temperatureCelsius = ((double) inputTemp - 32) / 1.8;
             System.out.printf("%.2s F is %.2s C.", inputTemp, temperatureCelsius);
         }
         if (inputDeg.equals("C")) {
-            Double temperatureFarenheit = (double)inputTemp * 1.8 + 32;
+            Double temperatureFarenheit = (double) inputTemp * 1.8 + 32;
             System.out.printf("%.2f C is %.2f F", inputTemp, temperatureFarenheit);
         }
     }

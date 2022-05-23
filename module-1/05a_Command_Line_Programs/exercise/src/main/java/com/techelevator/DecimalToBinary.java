@@ -12,14 +12,35 @@ public class DecimalToBinary {
         String[] binary = userNumbers.split(" ");
 
         for (int i = 0; i < binary.length; i++) {
+            if(i == 0) {
+                System.out.printf("%s in binary is ", binary[i]);
+            } else {
+                System.out.printf("\n%s in binary is ", binary[i]);
+            }
+            int[] numToBinary = new int[45];
+            int binaryCounter = 0;
+            int binInt = Integer.parseInt(binary[i]);
 
-            int givenNumber = Integer.parseInt(binary[i]);
-            String numberToBinary = Integer.toBinaryString(givenNumber);
-            System.out.printf("%s in binary is %s\n", givenNumber, numberToBinary);
+            while(binInt > 0) {
+                numToBinary[binaryCounter++] = binInt % 2;
+                binInt = binInt/2; //divide itself by 2 until its to 0
+            }
+            for(int j = binaryCounter - 1; j >= 0; j--){
+                System.out.print(numToBinary[j]);
+            }
         }
     }
 }
 
+
+
 //460 8218 1 31313 987654321
 
+//            int givenNumber = Integer.parseInt(binary[i]);
+//            String numberToBinary = Integer.toBinaryString(givenNumber);
+//            System.out.printf("%s in binary is %s\n", givenNumber, numberToBinary);
 
+//        if(binInt % 2 == 0){
+//                    numToBinary[binaryCounter++] = 0;
+//                } else {
+//                    numToBinary[binaryCounter++] = 1;
