@@ -12,12 +12,13 @@ public class DecimalToBinary {
         String[] binary = userNumbers.split(" ");
 
         for (int i = 0; i < binary.length; i++) {
+            int randomHighNumForUnknownArrayLength = 45;
             if(i == 0) {
                 System.out.printf("%s in binary is ", binary[i]);
             } else {
                 System.out.printf("\n%s in binary is ", binary[i]);
             }
-            int[] numToBinary = new int[45];
+            int[] numToBinary = new int[randomHighNumForUnknownArrayLength];
             int binaryCounter = 0;
             int binInt = Integer.parseInt(binary[i]);
 
