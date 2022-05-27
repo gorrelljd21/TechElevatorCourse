@@ -169,7 +169,7 @@ public class Exercises {
      */
     public String theEnd(String str, boolean front) {
         if (front) {
-            return str.substring(1);
+            return str.substring(0,1);
         } else return str.substring(str.length() - 1);
     }
 
@@ -324,13 +324,23 @@ public class Exercises {
      doubleX("xxxxx") → true
      */
     public boolean doubleX(String str) {
-        for (int i = 0; i < str.length(); i++) {
-            if (str.substring(i).contains("x") && str.substring(i+1).contains("x")) {
-                return true;
-            }
+        int areThereTwoXs = str.indexOf("x");
+
+        if((areThereTwoXs == -1) || (areThereTwoXs == str.length()-1)){
+            return false;
         }
-        return false;
+        return str.charAt(areThereTwoXs+1) == 'x';
     }
+
+
+//        str.indexOf("x").;
+//        for (int i = 0; i < str.length()-1; i++) {
+//            if (str.substring(i,i+2).contains("xx")) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     //str.substring().contains("x")){
     /*
