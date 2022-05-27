@@ -274,17 +274,7 @@ public class Exercises {
      */
     public Map<String, Integer> consolidateInventory(Map<String, Integer> mainWarehouse,
                                                      Map<String, Integer> remoteWarehouse) {
-        Map<String, Integer> mergedMap = new HashMap<>();
-
-        for (Map.Entry<String, Integer> entry : mergedMap.entrySet()){ //idk bout the entry.set
-            mergedMap.put(mainWarehouse.containsKey(key), mainWarehouse.containsValue(value));
-            if (mainWarehouseKey.equals(remoteWarehouse(key))){
-                mainWarehouseKey + remoteWarehouseKey;
-            } else {
-                return mergedMap; //return the keys that were not repeated
-            }
-        }
-        return mergedMap;
+        return null;
     }
     // map.merge
     //theres probably gonna be two loops for each map somehow
