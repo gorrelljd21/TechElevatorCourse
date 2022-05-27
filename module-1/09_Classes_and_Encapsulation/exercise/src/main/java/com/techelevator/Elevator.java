@@ -1,16 +1,16 @@
 package com.techelevator;
 
 public class Elevator {
-    public int currentFloor = 0;
-    public int numberOfFloors = 0;
-    public boolean doorOpen = false;
+    private int currentFloor = 1;
+    private int numberOfFloors;
+    private boolean doorOpen = false;
 
-    public Elevator(int numberOfFloors) {
-        this.numberOfFloors = numberOfFloors;
+    public Elevator(int numberOfLevels) {
+        this.numberOfFloors = numberOfLevels;
     }
 
     public int getCurrentFloor() {
-        return currentFloor = 1;
+        return currentFloor;
     }
 
     public int getNumberOfFloors() {
@@ -22,31 +22,25 @@ public class Elevator {
     }
 
     public void openDoor(){
-        if(!doorOpen) {
             doorOpen = true;
-        }
     }
     public void closeDoor(){
-        if(doorOpen){
             doorOpen = false;
-        }
     }
     public void goUp(int desiredFloor){
-        if(doorOpen){
-            if(getCurrentFloor() < getNumberOfFloors()) {
-                desiredFloor = (desiredFloor - currentFloor) + currentFloor;
+        if(!doorOpen){
+            if(desiredFloor > currentFloor && desiredFloor <= numberOfFloors) {
+                currentFloor = desiredFloor;
             }
         }
     }
 
     public void goDown(int desiredFloor){
-        if(doorOpen){
-            if(getCurrentFloor() < getNumberOfFloors()){
-                desiredFloor = (currentFloor - desiredFloor) - currentFloor;
+        if(!doorOpen){
+            if(desiredFloor < currentFloor && desiredFloor > 0){
+                currentFloor = desiredFloor;
             }
         }
     }
 }
 
-//        goUp(int desiredFloor) sends the elevator upward to the desired floor as long as the door isn't open. The elevator can't go past the last floor.
-//        goDown(int desiredFloor) sends the elevator downward to the desired floor as long as the door isn't open. It can't go past floor one.

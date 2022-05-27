@@ -297,7 +297,12 @@ public class Exercises {
      */
     public Map<String, Integer> last2Revisited(String[] words) {
 
-        return null;
+        Map<String, Integer> counts = new HashMap<>();
+
+        for(String word : words){
+            counts.put(word, LastTwo.last2(word));
+        }
+        return counts;
     }
 
 }
