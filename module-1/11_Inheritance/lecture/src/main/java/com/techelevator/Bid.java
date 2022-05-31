@@ -17,4 +17,9 @@ public class Bid {
 	public int getBidAmount() {
 		return bidAmount;
 	}
+
+	@Override
+	public String toString() {
+		return String.format(" %s %s", bidder, bidAmount);
+	}
 }
