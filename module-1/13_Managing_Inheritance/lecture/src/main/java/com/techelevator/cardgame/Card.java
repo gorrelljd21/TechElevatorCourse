@@ -1,30 +1,38 @@
-package com.techelevator;
+package com.techelevator.cardgame;
 
 public class Card {
 
-    private final static String[] SUIT_NAMES = new String[] { "Nil", "Spades", "Diamonds", "Clubs", "Hearts" };
-    private final static String[] RANK_NAMES = new String[] { "Joker", "Ace", "Two", "Three", "Four", "Five", "Six", "Seven",
-            "Eight", "Nine", "Ten", "Jack", "Queen", "King" };
+    public enum Suits {
+        CLUBS,
+        SPADES,
+        HEARTS,
+        DIAMONDS
+    }
 
-    private int suit = 0;
-    private int rank = 0;
+    public enum Rank {
+        DEUCE, THREE, FOUR, FIVE, SIX, SEVEN,
+        EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
+    }
+
+    private final Suits suit;
+    private final Rank rank;
     private boolean faceDown = true;
 
-    public Card(int suit, int rank) {
+    public Card(Suits suit, Rank rank) {
         this(suit, rank, false);
     }
 
-    public Card(int suit, int rank, boolean showFaceUp) {
+    public Card(Suits suit, Rank rank, boolean showFaceUp) {
         this.suit = suit;
         this.rank = rank;
         this.faceDown = !showFaceUp;
     }
 
-    public int getSuit() {
+    public Suits getSuit() {
         return suit;
     }
 
-    public int getRank() {
+    public Rank getRank() {
         return rank;
     }
 
@@ -41,15 +49,7 @@ public class Card {
     }
 
     public String toString() {
-        return String.format("%s of %s", getRankName(rank), getSuitName(suit));
-    }
-
-    public static String getSuitName(int suit) {
-        return SUIT_NAMES[suit];
-    }
-
-    public static String getRankName(int rank) {
-        return RANK_NAMES[rank];
+        return String.format("%s of %s", rank, suit);
     }
 
 }

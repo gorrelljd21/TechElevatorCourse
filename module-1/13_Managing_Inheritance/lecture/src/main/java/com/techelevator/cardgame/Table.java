@@ -1,4 +1,4 @@
-package com.techelevator;
+package com.techelevator.cardgame;
 
 import java.math.BigDecimal;
 
@@ -10,8 +10,8 @@ public class Table {
 
         deck.shuffle();
         System.out.println(deck.toString());
-
-
+//
+//        Card card = new Card(Card.Suits.CLUBS, Card.Rank.DEUCE);
 
     }
 }

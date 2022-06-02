@@ -1,4 +1,4 @@
-package com.techelevator;
+package com.techelevator.cardgame;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,11 +30,9 @@ public class Deck {
     private List<Card> cards = new ArrayList<>(52);
 
     public Deck() {
-        int[] pokerSuits = new int[] { SPADES, DIAMONDS, CLUBS, HEARTS };
-        int[] pokerRanks = new int[] { ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING };
 
-        for(int suit : pokerSuits) {
-            for(int rank : pokerRanks) {
+        for(Card.Suits suit : Card.Suits.values()) {
+            for(Card.Rank rank : Card.Rank.values()) {
                 Card card = new Card(suit, rank);
                 cards.add(card);
             }

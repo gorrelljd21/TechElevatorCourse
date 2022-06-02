@@ -51,5 +51,4 @@ public class BankAccount implements Accountable {
     }
     //	Withdraws transferAmount from this account, deposits it into destinationAccount,
     //	and returns the new balance of this account.
-
 }
