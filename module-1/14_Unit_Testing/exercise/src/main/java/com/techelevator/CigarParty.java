@@ -7,6 +7,8 @@ public class CigarParty {
      when the number of cigars is between 40 and 60, inclusive. Unless it is the weekend, in which case
      there is no upper bound on the number of cigars. Return true if the party with the given values is
      successful, or false otherwise.
+     true = successful between 40-60, unless weekend 40+
+     false = unsuccessful
      haveParty(30, false) → false
      haveParty(50, false) → true
      haveParty(70, true) → true
