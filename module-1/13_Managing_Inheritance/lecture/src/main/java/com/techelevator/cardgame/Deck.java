@@ -39,6 +39,8 @@ public class Deck {
         }
     }
 
+
+
     public void shuffle() {
         Collections.shuffle(cards);
     }
@@ -55,3 +57,4 @@ public class Deck {
 
 
 }
+

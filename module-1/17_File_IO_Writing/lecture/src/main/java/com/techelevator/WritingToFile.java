@@ -10,11 +10,13 @@ import java.util.Scanner;
 public class WritingToFile {
     public static void main(String[] args) {
 
-        Scanner userInput = new Scanner(System.in);
-        System.out.println("what is the name of the file?");
-        String filename = userInput.nextLine();
+        //print to file, create file, print current time
 
-        File file = new File(filename);
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("what is the name of the file");
+        String fileName = userInput.nextLine();
+
+        File file = new File(fileName);
         try {
             FileOutputStream fos = new FileOutputStream(file, true);
             PrintWriter writer = new PrintWriter(fos);
