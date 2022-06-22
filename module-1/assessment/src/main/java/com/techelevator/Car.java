@@ -15,38 +15,30 @@ public class Car {
         this.isClassicCar = isClassicCar;
     }
 
-    public int CarAge (int age) {
-        LocalDateTime date = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
-        String todayStr = date.format(formatter);
-        Integer today = Integer.parseInt(todayStr);
-        return today - age;
+    public int carAge() {
+        int currentYear = LocalDateTime.now().getYear();
+        int age = currentYear - carYear;
+
+        return age;
     }
-    // not sure how i could do this here and then call it in main??
-
-    LocalDateTime date = LocalDateTime.now();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
-    String todayStr = date.format(formatter);
-    Integer today = Integer.parseInt(todayStr);
-    // i know this is repetitive but I didn't know how to make today work in the int age
-    // for the test
-
-    private final int age = today - this.carYear;
 
     public Boolean needsEcheck(int yearToCheck) {
-        if (age < 4) {
-            if (age > 25) {
-                if (!isClassicCar) {
-                    // car needs to be checked
+        boolean doesNeedCheck = false;
+        int age = yearToCheck - carYear;
+        if (age > 4 && age < 25) {
+            if (!isClassicCar) {
+                if (carYear % 2 == 0 && yearToCheck % 2 == 0) {
+                    doesNeedCheck = true;
+                } else if (carYear % 2 == 1 && yearToCheck % 2 == 1) {
+                    doesNeedCheck = true;
                 }
             }
         }
-        return null;
+        return doesNeedCheck;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "CAR - " + this.carYear + " - " + this.carMake;
     }
-
 }

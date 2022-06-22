@@ -29,13 +29,7 @@ public class Module1CodingAssessment {
 				Car car = new Car (yearOfCar, makeOfCar, isAClassicCar);
 				System.out.println(car);
 
-				LocalDateTime date = LocalDateTime.now();
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
-				String todayStr = date.format(formatter);
-				Integer today = Integer.parseInt(todayStr);
-				int age = today - yearOfCar;
-
-				totalCarAge = totalCarAge + age;
+				totalCarAge = totalCarAge + car.carAge();
 
 			}
 			System.out.println("");
@@ -45,8 +39,5 @@ public class Module1CodingAssessment {
 		} catch (Exception e) {
 			System.out.println("Error");
 		}
-
-
-
 	}
 }

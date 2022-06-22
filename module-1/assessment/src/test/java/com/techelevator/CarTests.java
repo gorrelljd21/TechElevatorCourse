@@ -1,14 +1,68 @@
 package com.techelevator;
 
 import org.junit.Assert;
+import org.junit.Test;
 
 public class CarTests {
-    Car car = new Car(2019, "Subaru", false);
 
-    int result = car.today - car.CarAge(2019); //actual should be 3 years
+    @Test
+    public void whenCarIsOne_returnFalse(){
+        //arrange
+        Car car = new Car(2021, "Rolls Royce", false);
 
-    Assert.assertEquals("Age is incorrect", 5, result);
+        //act
+        boolean actual = car.needsEcheck(2022);
 
-    //I don't know why this isn't working. I put the inputs into the car cause there was a red squiggly under the parenthesis
+        //assert
+        Assert.assertFalse(actual);
+    }
+
+    @Test
+    public void whenCarIsThirty_returnFalse(){
+        //arrange
+        Car car = new Car(1990, "Rolls Royce", false);
+
+        //act
+        boolean actual = car.needsEcheck(2022);
+
+        //assert
+        Assert.assertFalse(actual);
+    }
+
+    @Test
+    public void whenCarIsOddAndCurrentYearEven_returnFalse(){
+        //arrange
+        Car car = new Car(2021, "Rolls Royce", false);
+
+        //act
+        boolean actual = car.needsEcheck(2028);
+
+        //assert
+        Assert.assertFalse(actual);
+    }
+
+    @Test
+    public void whenCarIsEvenAndCurrentYearEven_returnTrue(){
+        //arrange
+        Car car = new Car(2020, "Rolls Royce", false);
+
+        //act
+        boolean actual = car.needsEcheck(2028);
+
+        //assert
+        Assert.assertTrue(actual);
+    }
+
+    @Test
+    public void whenCarIsClassic_returnFalse(){
+        //arrange
+        Car car = new Car(2021, "Rolls Royce", true);
+
+        //act
+        boolean actual = car.needsEcheck(2028);
+
+        //assert
+        Assert.assertFalse(actual);
+    }
 
 }

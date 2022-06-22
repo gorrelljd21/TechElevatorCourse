@@ -27,7 +27,8 @@ public interface DepartmentDao {
 	 * are already in the datastore.
 	 *
 	 * @param updatedDepartment the department object to update
+	 * @return
 	 */
-	public void updateDepartment(Department updatedDepartment);
+	public Department updateDepartment(Department updatedDepartment);
 
 }
