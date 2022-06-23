@@ -10,8 +10,6 @@ public interface ParkDao {
 
     List<Park> getParksByState(String stateAbbreviation);
 
-    List<Park> searchParksByName(String nameToSearchFor);
-
     Park createPark(Park park);
 
     void updatePark(Park park);
