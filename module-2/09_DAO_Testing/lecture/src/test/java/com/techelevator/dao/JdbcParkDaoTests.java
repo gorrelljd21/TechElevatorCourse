@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JdbcParkDaoTests extends BaseDaoTests {
 
@@ -25,17 +27,45 @@ public class JdbcParkDaoTests extends BaseDaoTests {
 
     @Test
     public void getPark_returns_correct_park_for_id() {
-        Assert.fail();
+        //arrange handled via spring black magic
+
+        //act
+        Park park1Actual = sut.getPark(1);
+
+        //assert
+        //Assert.assertEquals("Park IDs differ.",PARK_1.getParkId(), park1Actual.getParkId());
+        assertParksMatch(PARK_1, park1Actual);
     }
 
     @Test
     public void getPark_returns_null_when_id_not_found() {
-        Assert.fail();
+        //act
+        Park parkActual = sut.getPark(0);
+
+        //assert
+        Assert.assertNull("Didn't get null when ID not found", parkActual);
+        //assertParksMatch(null, parkActual); can't do this because there isn't a park instance coming back.
+        //Throws an NPE
     }
 
     @Test
     public void getParksByState_returns_all_parks_for_state() {
-        Assert.fail();
+        //park_state table
+        //arrange - set up what I expect to get back, but database set up is done
+        List<Park> expected = new ArrayList<>();
+        expected.add(PARK_1);
+        expected.add(PARK_3);
+
+        //act - call getparksbystate dao, a list of parks
+        List<Park> actual = sut.getParksByState("AA");
+
+        //assert
+        //Assert.assertEquals("Didn't get expected parks.", expected, actual); //this works because the equals is overridden in Park.java, Park.equals(Object)
+        // need long for loop because you need to find the exact location in each expected and actual to know where you are in the list to compare
+        Assert.assertEquals("List sizes differ.", expected.size(), actual.size()); //ensure list sizes are equal before looping
+        for (int i = 0; i < expected.size(); i++){
+            assertParksMatch(expected.get(i), actual.get(i));
+        }
     }
 
     @Test
@@ -45,7 +75,17 @@ public class JdbcParkDaoTests extends BaseDaoTests {
 
     @Test
     public void createPark_returns_park_with_id_and_expected_values() {
-        Assert.fail();
+        //arrange for db done
+        //arrange for park
+        Park expected = new Park(7, "Park 4", LocalDate.now(), 3.14, true);
+
+        //act
+        Park actual = sut.createPark(expected);
+
+        //assert
+        Assert.assertEquals("Didn't get expected park_id.", 4, actual.getParkId());
+        expected.setParkId(4);
+        assertParksMatch(expected, actual); // doesn't pass by itself because
     }
 
     @Test
@@ -74,11 +114,11 @@ public class JdbcParkDaoTests extends BaseDaoTests {
     }
 
     private void assertParksMatch(Park expected, Park actual) {
-        Assert.assertEquals(expected.getParkId(), actual.getParkId());
-        Assert.assertEquals(expected.getParkName(), actual.getParkName());
-        Assert.assertEquals(expected.getDateEstablished(), actual.getDateEstablished());
-        Assert.assertEquals(expected.getArea(), actual.getArea(), 0.1);
-        Assert.assertEquals(expected.getHasCamping(), actual.getHasCamping());
+        Assert.assertEquals("Park IDs differ.", expected.getParkId(), actual.getParkId());
+        Assert.assertEquals("Park names differ.", expected.getParkName(), actual.getParkName());
+        Assert.assertEquals("Dates established differ.", expected.getDateEstablished(), actual.getDateEstablished());
+        Assert.assertEquals("Areas differ.", expected.getArea(), actual.getArea(), 0.1);
+        Assert.assertEquals("Has camping differs.",expected.getHasCamping(), actual.getHasCamping());
     }
 
 }

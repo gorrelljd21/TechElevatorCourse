@@ -1,4 +1,4 @@
-BEGIN TRANSACTION;
+    BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS park_state, park, city, state CASCADE;
 

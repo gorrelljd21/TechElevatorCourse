@@ -1,43 +1,46 @@
 Bug 1
 -----
 Test that demonstrates problem:
-
+    getTimesheetsByEmployeeId_returns_list_of_all_timesheets_for_employee()
 Expected output:
-
+    return both timesheets with specific employee_id
 Actual output:
-
+    only returned one timesheet with specific employee_id
 How did you fix this bug?
-
+    change the if statement for a while loop within the getTimesheetsByEmployeeId
+    method.
 
 Bug 2
 -----
 Test that demonstrates problem:
-
+    getTimesheetsByProjectId_returns_list_of_all_timesheets_for_project()
 Expected output:
-
+    output 3 timesheets with specific project_id
 Actual output:
-
+    only returned 2 timesheets with specific project_id
 How did you fix this bug?
-
+    changed the WHERE clause to 'project_id' from 'employee_id' in the
+    getTimesheetsByProjectId method.
 
 Bug 3
 -----
 Test that demonstrates problem:
-
+    created_timesheet_has_expected_values_when_retrieved()
 Expected output:
-
+    the updated timesheet returned correctly
 Actual output:
-
+    the updated timesheet not returned correctly
 How did you fix this bug?
-
+    add in the billable boolean into the updateTimesheet method in the
+    SET clause and then again in the .update().
 
 Bug 4
 -----
 Test that demonstrates problem:
-
+    getBillableHours_returns_correct_total()
 Expected output:
-
+    output if the hours are billable
 Actual output:
-
+    tried to output unbillable hours
 How did you fix this bug?
-
+    added in billable = true to the getBillableHours method

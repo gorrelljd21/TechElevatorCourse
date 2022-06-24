@@ -14,11 +14,13 @@ public class JdbcStateDaoTests extends BaseDaoTests {
     private static final State STATE_C = new State("CC", "State C");
 
     private JdbcStateDao sut;
+    //system under test
 
     @Before
     public void setup() {
         sut = new JdbcStateDao(dataSource);
     }
+    //runs before every single test, sets sut to new Dao. Resets Dao
 
     @Test
     public void getState_returns_correct_state_for_abbreviation() {
