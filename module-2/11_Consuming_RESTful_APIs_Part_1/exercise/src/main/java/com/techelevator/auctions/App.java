@@ -19,13 +19,15 @@ public class App {
             consoleService.printMainMenu();
             menuSelection = consoleService.promptForMenuSelection();
             if (menuSelection == 1) {
-                handleListAllAuctions();
+                consoleService.printAuctions(auctionService.getAllAuctions());
             } else if (menuSelection == 2) {
-                handleShowAuctionDetails();
+                consoleService.printAuction(auctionService.getAuction(1));
             } else if (menuSelection == 3) {
-                handleFindAuctionsByTitle();
+                consoleService.printAuctions(auctionService.
+                        getAuctionsMatchingTitle("Bell Computer Monitor"));
             } else if (menuSelection == 4) {
-                handleFindAuctionsByPrice();
+                consoleService.printAuctions(auctionService.
+                        getAuctionsAtOrBelowPrice(100.39));
             } else if (menuSelection != 0) {
                 System.out.println("Invalid Selection");
             }

@@ -1,5 +1,8 @@
 package com.techelevator.hotels;
 
+import com.techelevator.hotels.model.Hotel;
+import com.techelevator.hotels.model.Review;
+import com.techelevator.hotels.model.StarWarsMovie;
 import com.techelevator.hotels.services.ConsoleService;
 import com.techelevator.hotels.services.HotelService;
 
@@ -17,20 +20,22 @@ public class App {
         int menuSelection = -1;
 
         while (menuSelection != 0) {
-            consoleService.printMainMenu();
+            consoleService.printMainMenu(); //write to screen and read from keyboard
             menuSelection = consoleService.promptForMenuSelection();
             if (menuSelection == ConsoleService.LIST_ALL_HOTELS) {
-                System.out.println("Not implemented");
+                Hotel[] hotels = hotelService.listHotels();
+                consoleService.printHotels(hotels); //invoke list of hotels
             } else if (menuSelection == ConsoleService.LIST_ALL_REVIEWS) {
-                System.out.println("Not implemented");
+                consoleService.printReviews(hotelService.listReviews());
             } else if (menuSelection == ConsoleService.SHOW_HOTEL_1) {
-                System.out.println("Not implemented");
+                System.out.println(hotelService.getHotelById(1));
             } else if (menuSelection == ConsoleService.SHOW_REVIEWS_FOR_HOTEL_1) {
                 System.out.println("Not implemented");
             } else if (menuSelection == ConsoleService.LIST_HOTELS_3_STAR) {
                 System.out.println("Not implemented");
             } else if (menuSelection == ConsoleService.PUBLIC_API_QUERY) {
-                System.out.println("Not implemented - Create a custom Web API query here");
+                StarWarsMovie movie = hotelService.getWithCustomQuery();
+                System.out.println(movie);
             } else if (menuSelection == ConsoleService.EXIT) {
                 continue;
             } else {

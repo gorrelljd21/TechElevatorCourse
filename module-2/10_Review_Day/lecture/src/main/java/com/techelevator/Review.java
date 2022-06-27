@@ -8,4 +8,6 @@ public class Review {
     /*Overrides:
 
      */
+
+    /* update, queryForObject, queryForRowSet */
 }

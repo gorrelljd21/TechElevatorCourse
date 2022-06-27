@@ -7,6 +7,11 @@ public class Hotel {
     private int stars;
     private int roomsAvailable;
     private String coverImage;
+    private int costPerNight;
+
+    public int getCostPerNight() {
+        return costPerNight;
+    }
 
     public int getId() {
         return id;
@@ -37,6 +42,7 @@ public class Hotel {
                 "\n Name: " + name +
                 "\n Stars: " + stars +
                 "\n Rooms Available: " + roomsAvailable +
-                "\n Cover Image: " + coverImage;
+                "\n Cover Image: " + coverImage +
+                "\n Cost per Night: " + costPerNight;
     }
 }
