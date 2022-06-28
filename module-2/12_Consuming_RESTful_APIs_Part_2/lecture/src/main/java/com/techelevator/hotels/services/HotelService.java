@@ -3,7 +3,11 @@ package com.techelevator.hotels.services;
 import com.techelevator.hotels.model.Hotel;
 import com.techelevator.hotels.model.Reservation;
 import com.techelevator.util.BasicLogger;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,9 +20,22 @@ public class HotelService {
     /**
      * Create a new reservation in the hotel reservation system
      */
-    public Reservation addReservation(Reservation newReservation) {
-        // TODO: Implement method
-        return null;
+    public Reservation addReservation(Reservation newReservation) { //populated model object
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON); //setting the header
+        HttpEntity<Reservation> httpEntity = new HttpEntity<>(newReservation, headers);  //gonna have a reservation in it
+
+        Reservation result = null; //make null so it has some value and allows for result to stay in scope
+
+        try {
+            result = restTemplate.postForObject(API_BASE_URL + "reservation", httpEntity, Reservation.class);
+        } catch (ResourceAccessException rae){ //couldn't get there
+            BasicLogger.log("Error connecting to server. Msg: " + rae.getMessage());
+        } catch (RestClientResponseException rcre) {
+            BasicLogger.log("Error response. Status: " + rcre.getStatusText() + " Msg: " + rcre.getMessage()); //something wrong w conversation
+        }
+        //where are we sending this, entity, send a reservation in, get a reservation back
+        return result;
     }
 
     /**
@@ -26,16 +43,41 @@ public class HotelService {
      * reservation
      */
     public boolean updateReservation(Reservation updatedReservation) {
-        // TODO: Implement method
-        return false;
+        String endpointUrl = API_BASE_URL + "reservations/" + updatedReservation.getId();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Reservation> httpEntity = new HttpEntity<>(updatedReservation, headers);
+
+//        try{
+//            restTemplate.put(endpointUrl, httpEntity);
+//        } catch (ResourceAccessException rae){
+//            BasicLogger.log("Error connecting to server. Msg: " + rae.getMessage());
+//        } catch (RestClientResponseException rcre) {
+//            BasicLogger.log("Error response. Status: " + rcre.getStatusText() + " Msg: " + rcre.getMessage());
+//        }
+        try {
+            restTemplate.put(endpointUrl, httpEntity);
+            return true;
+        } catch (ResourceAccessException | RestClientResponseException e) {
+            BasicLogger.log(e.getMessage()); //condensed version, they don't have to be related
+            return false;
+        }
     }
 
     /**
      * Delete an existing reservation
      */
     public boolean deleteReservation(int id) {
-        // TODO: Implement method
-        return false;
+        String endpointUrl = API_BASE_URL + "reservations/" + id;
+
+        try {
+            restTemplate.delete(endpointUrl);
+            return true;
+        } catch (ResourceAccessException | RestClientResponseException e) {
+            BasicLogger.log(e.getMessage());
+            return false;
+        }
     }
 
     /* DON'T MODIFY ANY METHODS BELOW */
