@@ -11,7 +11,7 @@ public class Hotel {
     private String coverImage;
 
     public Hotel() {
-    }
+    } //default constructor for Spring
 
     public Hotel(int id, String name, Address address, int stars, int roomsAvailable, double costPerNight) {
         this.id = id;
