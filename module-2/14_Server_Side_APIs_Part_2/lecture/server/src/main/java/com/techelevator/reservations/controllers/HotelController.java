@@ -9,6 +9,7 @@ import com.techelevator.reservations.model.Reservation;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,15 +83,35 @@ public class HotelController {
      * @param reservation
      * @param hotelID
      */
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.CREATED) //happy path response - "201 Created"
     @RequestMapping(path = "/hotels/{id}/reservations", method = RequestMethod.POST)
-    public Reservation addReservation(@RequestBody Reservation reservation, @PathVariable("id") int hotelID)
+    public Reservation addReservation(@RequestBody @Valid Reservation reservation, @PathVariable("id") int hotelID)
             throws HotelNotFoundException {
         return reservationDao.create(reservation, hotelID);
     }
 
+    //to update,
+    // putMapping gets rid of the need for method = RequestMethod.POST
+    @PutMapping(path = "/hotels/{hotelId}/reservations/{reservationId}")
+    public Reservation updateReservation(@RequestBody @Valid Reservation reservation,
+                                         @PathVariable int hotelId, @PathVariable int reservationId)
+            throws ReservationNotFoundException, HotelNotFoundException{
+        reservation.setHotelID(hotelId); //makes sure it's attached to specified hotel
+        reservation.setId(reservationId);
+        return reservationDao.update(reservation, reservationId);
+    }
+
+    @DeleteMapping(path = "/hotels/{hotelId}/reservations/{reservationId}")
+    public void deleteReservation(@PathVariable int hotelId, @PathVariable int reservationId)
+            throws ReservationNotFoundException {
+        reservationDao.delete(reservationId);
+    }
+
     /**
      * /hotels/filter?state=oh&city=cleveland
+     * hello how are you doing today?
+     * Hallo, wie ghets?
+     * Hola, como estas?
      *
      * @param state the state to filter by
      * @param city  the city to filter by

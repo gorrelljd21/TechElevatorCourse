@@ -49,12 +49,17 @@ public class HotelController {
     }
 
     @RequestMapping(path = "/hotels/{hotelId}/reservations", method = RequestMethod.GET)
-    public List<Reservation> getReservationsForHotelId(@PathVariable int hotelId){ //annotating a parameter method
-        return reservationDao.findByHotel(hotelId);
+    public List<Reservation> getReservationsForHotelId(@PathVariable int hotelId) { //annotating a parameter method
+        return reservationDao.findByHotel(hotelId)
+    }
+        // query parameter "?hotel=2"
+// path variabels not good when there are options to chose from
+
+    @RequestMapping(path = "/reservations", method = RequestMethod.POST)
+    public Reservation addReservation(@RequestBody Reservation reservation){
+        return reservationDao.create(reservation, reservation.getHotelID());
     }
 
 
 
 }
-// query parameter "?hotel=2"
-// path variabels not good when there are options to chose from

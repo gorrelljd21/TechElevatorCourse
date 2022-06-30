@@ -54,26 +54,36 @@ public class MemoryReservationDao implements ReservationDao {
     }
 
     @Override
-    public Reservation get(int reservationID) {
+    public Reservation get(int reservationID) throws ReservationNotFoundException{
         for (Reservation res : reservations) {
             if (res.getId() == reservationID) {
                 return res;
             }
         }
-        return null;
+        //if made it here then reservationID not found
+        throw new ReservationNotFoundException(); //can be handled with more control than just returning a null
     }
 
     @Override
-    public Reservation create(Reservation reservation, int hotelID) {
+    public Reservation create(Reservation reservation, int hotelID) throws HotelNotFoundException{
+        if ((hotelDao.get(hotelID)) == null){
+            throw new HotelNotFoundException();
+        }
+
         reservation.setId(getMaxIdPlusOne());
         reservations.add(reservation);
         return reservation;
     }
 
     @Override
-    public Reservation update(Reservation reservation, int id) throws ReservationNotFoundException {
+    public Reservation update(Reservation reservation, int id)
+            throws ReservationNotFoundException, HotelNotFoundException {
         Reservation result = reservation;
         boolean finished = false;
+
+        if(hotelDao.get(reservation.getHotelID()) == null){
+            throw new HotelNotFoundException();
+        }
 
         for (int i = 0; i < reservations.size(); i++) {
             if (reservations.get(i).getId() == id) {
