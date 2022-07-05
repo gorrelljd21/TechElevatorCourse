@@ -5,6 +5,7 @@ import com.techelevator.hotels.model.Reservation;
 import com.techelevator.util.BasicLogger;
 import org.springframework.http.*;
 import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
@@ -25,10 +26,17 @@ public class HotelService {
     public Reservation addReservation(Reservation newReservation) {
         Reservation returnedReservation = null;
 
-        //TODO: Add implementation
-        BasicLogger.log("HotelService.addReservation() has not been implemented");
+        try {
+            ResponseEntity<Reservation> response = restTemplate.exchange(API_BASE_URL + "reservations", HttpMethod.POST,
+                    makeReservationEntity(newReservation), Reservation.class);
+            //restTemplate.postForObject
+            returnedReservation = response.getBody();
+        } catch (RestClientException e){
+            BasicLogger.log(e.getMessage());
+        }
+//            BasicLogger.log("HotelService.addReservation() has not been implemented");
 
-        return returnedReservation;
+            return returnedReservation;
     }
 
     /**
@@ -67,8 +75,8 @@ public class HotelService {
     public Hotel[] listHotels() {
         Hotel[] hotels = null;
         try {
-            ResponseEntity<Hotel[]> response = restTemplate.exchange(API_BASE_URL + "hotels", HttpMethod.GET,
-                            makeAuthEntity(), Hotel[].class);
+            ResponseEntity<Hotel[]> response = restTemplate.exchange(API_BASE_URL + "hotels",
+                    HttpMethod.GET, makeAuthEntity(), Hotel[].class);
             hotels = response.getBody();
         } catch (RestClientResponseException | ResourceAccessException e) {
             BasicLogger.log(e.getMessage());
