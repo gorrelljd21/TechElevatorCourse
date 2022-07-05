@@ -10,6 +10,9 @@ import java.time.format.DateTimeFormatter;
 public class BasicLogger {
 
 	private static PrintWriter pw = null;
+
+	private BasicLogger() {
+	}
 	
 	public static void log(String message) {
 		try {

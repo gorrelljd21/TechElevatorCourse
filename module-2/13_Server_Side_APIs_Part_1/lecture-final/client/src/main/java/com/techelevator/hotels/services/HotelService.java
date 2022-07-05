@@ -28,6 +28,7 @@ public class HotelService {
         try {
            returnedReservation  = restTemplate.postForObject(API_BASE_URL + "reservations", entity, Reservation.class);
         } catch (RestClientResponseException | ResourceAccessException e) {
+            //BasicLogger logger = new BasicLogger();
             BasicLogger.log(e.getMessage());
         }
         return returnedReservation;
