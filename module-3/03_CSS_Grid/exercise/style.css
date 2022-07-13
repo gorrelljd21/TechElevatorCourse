@@ -1,3 +1,130 @@
+
+header {
+	grid-area: ga-header;
+}
+
+#headline {
+    grid-area: ga-headline;
+}
+
+#student-picture {
+	grid-area: ga-picture;
+    text-align: center;
+}
+
+#student-quote {
+    grid-area: ga-quote;
+}
+
+#student-profile {
+    grid-area: ga-profile;
+}
+
+#student-contact {
+    grid-area: ga-contact;
+    text-align: center;
+}
+
+#experience-code {
+    grid-area: ga-code;
+}
+
+#experience-database {
+    grid-area: ga-database;
+}
+
+#experience-web {
+    grid-area: ga-web;
+}
+
+#experience-design {
+    grid-area: ga-design;
+}
+
+#main-grid {
+    display: grid;
+    grid-area: ga-main;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 20px;
+    column-gap: 50px;
+    grid-template-areas:
+        "ga-headline    ga-headline ga-picture" 
+        "ga-quote       ga-quote    ga-picture"
+        "ga-profile     ga-profile  ga-contact"
+        "ga-experience  ga-experience   ga-experience"
+        ;
+    align-items: center;
+}
+
+#experience-grid{
+    display: grid;
+    grid-area: ga-experience;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 20px;
+    column-gap: 50px;
+    grid-template-areas: 
+        "ga-code    ga-code"
+        "ga-database    ga-database"
+        "ga-web ga-design"
+        ;
+}
+
+@media screen and (max-width: 1024px) {
+    #main-grid {
+        grid-template-columns: 1fr 1fr;
+        row-gap: 20px;
+        column-gap: 35px;
+        grid-template-areas: 
+            "ga-headline    ga-headline"
+            "ga-quote       ga-picture"
+            "ga-quote       ga-contact"
+            "ga-profile     ga-profile"
+            "ga-experience  ga-experience"
+            ;
+        
+    }
+
+    #experience-grid {
+        grid-template-columns: 1fr 1fr;
+        row-gap: 20px;
+        column-gap: 20px;
+        grid-template-areas: 
+            "ga-code    ga-web"
+            "ga-database    ga-design"
+            ;
+    }
+
+    @media screen and (max-width: 450px) {
+        #main-grid {
+            grid-template-columns: 1fr;
+            grid-template-areas:
+                "ga-headline"
+                "ga-picture"
+                "ga-contact"
+                "ga-quote"
+                "ga-profile"
+                "ga-experience"
+                ;
+        }
+
+        #experience-grid {
+            grid-template-columns: 1fr;
+            grid-template-areas:
+                "ga-code"
+                "ga-web"
+                "ga-database"
+                "ga-design"
+                ;
+        }
+    }
+}
+
+/*======================================================================*/
+
+footer {
+    grid-area: ga-footer;
+}
+
 * {
     font-family: Tahoma, Verdana, Segoe, sans-serif;
     box-sizing: border-box;
@@ -50,3 +177,4 @@ header img {
 #student-picture img{
     border-radius: 50%;
 }
+

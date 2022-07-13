@@ -1,0 +1,30 @@
+
+#container {
+    outline: dashed red;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr; /*specify size of columns*/
+    grid-template-areas: 
+        "ga-header  ga-header   ga-header   ga-header"
+        "ga-left    ga-right    ga-right    ga-right" 
+        "ga-footer  ga-footer   ga-footer   ga-footer"
+    ;
+    grid-template-rows: repeat(auto, 3); /*specify size of rows*/
+}
+
+header {
+    grid-area: ga-header;
+    text-align: center;
+}
+
+.left {
+    grid-area: ga-left;
+}
+
+.right {
+    grid-area: ga-right;
+}
+
+footer {
+    grid-area: ga-footer;
+    text-align: center;
+}

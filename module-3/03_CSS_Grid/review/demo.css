@@ -1,0 +1,9 @@
+/*ANY p tag under section tag is chosen*/
+section p {
+    background-color: red;
+}
+
+/*immediate child*/
+section > p {
+    background-color: blue;
+}
