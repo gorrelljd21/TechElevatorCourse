@@ -1,3 +1,11 @@
+.bio {
+  display: flex;
+}
+
+div.bio:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
 body {
   margin: 20px;
   padding: 0;

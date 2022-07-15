@@ -1,3 +1,12 @@
+
+.container {
+  display: flex;
+}
+
+div.box {
+  flex-grow: 1;
+}
+
 body {
   margin: 20px;
   padding: 0;

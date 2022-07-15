@@ -1,3 +1,18 @@
+
+.container {
+  display: flex;
+}
+
+div.box:nth-child(2),
+div.box:nth-child(4) {
+  flex-grow: 2;
+}
+
+div.box:nth-child(1),
+div.box:nth-child(3) {
+  flex-grow: 1;
+}
+
 body {
   margin: 20px;
   padding: 0;
