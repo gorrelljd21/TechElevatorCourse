@@ -126,3 +126,15 @@ function bye() {
     }
     return filteredArray;
 }
+
+
+
+function makeNumber(first, second = '') {
+    first = '42293';
+    second = '443';
+
+    let concatenated = first.concat(second);
+
+    console.log(parseInt(concatenated));
+}
+
