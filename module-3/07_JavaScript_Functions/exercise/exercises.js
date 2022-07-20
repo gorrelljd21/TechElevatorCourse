@@ -38,8 +38,9 @@ function isAdmitted(gpa, satScore = 0, recommendation = false) {
  */
 let unfilteredArray = [1, 2, 3, 4, 5, 6];
 
-//write a function takes a function and uses it in filter function. 
-//function foo(fn) {arr.filter(fn)}
+function useParameterToFilterArray(filteredFunction) {
+    return unfilteredArray.filter(filteredFunction);
+}
 
 /**
  * Write a function called makeNumber that takes two strings
@@ -55,9 +56,7 @@ let unfilteredArray = [1, 2, 3, 4, 5, 6];
  */
 
 function makeNumber(first, second = '') {
-    let concatenated = first.concat(second);
-
-    console.log(parseInt(concatenated));
+    return parseInt(first + second);
 }
 
 /**
@@ -68,8 +67,8 @@ function makeNumber(first, second = '') {
  * @returns {number} the sum of all the parameters (or arguments)
  */
 
-function addAll() {
-    number = 
+function addAll(...number) {
+    return number.reduce((total, num) => total += num, 0);
 }
 
 /*
@@ -78,10 +77,14 @@ function addAll() {
  * words and returns them as a new array. Use the `map` function.
  */
 
-function makeHappy(arr) {
-    const arr = [];
-    const newArr = arr.map(arr.unshift("Happy "));
-    return newArr;
+/**
+ * 
+ * @param {*} array takes an array to have Happy added to it
+ * @returns the array with Happy added to the front of the string
+ */
+
+function makeHappy(array) {
+    return array.map((i) => 'Happy ' + i);
 }
 
 /*
@@ -100,7 +103,18 @@ function makeHappy(arr) {
  *     streetNumber streetName streetType city state zip
  *
  * Use `map` and an anonymous function.
+*/
+
+/**
+ * 
+ * @param {*} array takes an array of objects for an address
+ * @returns the array in the form a mailing address through map
  */
+
+function getFullAddressesOfProperties(array) {
+    return array.map((a) => a.streetNumber + " " + a.streetName + " " + a.streetType
+        + " " + a.city + " " + a.state + " " + a.zip)
+}
 
 /**
  * Write and document a function called findLargest that uses `forEach`
@@ -117,7 +131,15 @@ function makeHappy(arr) {
  * @returns {number|string} the number or string that is largest
  **/
 
-
+function findLargest(array) {
+    let result = array[0];
+    array.forEach(v => {
+        if (v > result) {
+            result = v;
+        }
+    });
+    return result;
+}
 
 /*
  * CHALLENGE
