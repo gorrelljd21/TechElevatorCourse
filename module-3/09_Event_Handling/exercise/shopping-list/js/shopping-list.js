@@ -13,6 +13,41 @@ const groceries = [
   { id: 10, name: 'Tea', completed: false }
 ];
 
+document.addEventListener('DOMContentLoaded', e => {
+
+  setPageTitle();
+  displayGroceries();
+
+  const markComplete = document.querySelector('ul');
+  markComplete.addEventListener('click', e => {
+    if (!e.target.classList.contains('completed')) {
+      e.target.classList.add('completed');
+    }
+  });
+
+  const markIncomplete = document.querySelector('ul');
+  markComplete.addEventListener('dblclick', e => {
+    if (e.target.classList.contains('completed')) {
+      e.target.classList.remove('completed');
+    }
+  });
+
+  const items = document.querySelectorAll('li');
+  const button = document.querySelector('.btn');
+
+  button.addEventListener('click', () => {
+    if (allItemsIncomplete) {
+      allItemsIncomplete = false;
+      items.forEach((item) => { item.classList.add('completed') });
+      button.innerText = 'Mark All Incomplete';
+    } else {
+      allItemsIncomplete = true;
+      items.forEach((item) => { item.classList.remove('completed') });
+      button.innerText = 'Mark All Complete';
+    }
+  });
+})
+
 /**
  * This function will get a reference to the title and set its text to the value
  * of the pageTitle variable that was set above.
@@ -36,3 +71,4 @@ function displayGroceries() {
     ul.appendChild(li);
   });
 }
+
