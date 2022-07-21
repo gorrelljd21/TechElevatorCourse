@@ -59,12 +59,53 @@ function displayReview(review) {
 
 // LECTURE STARTS HERE ---------------------------------------------------------------
 
-// Set the product reviews page title.
-setPageTitle();
-// Set the product reviews page description.
-setPageDescription();
-// Display all of the product reviews on our page.
-displayReviews();
+document.addEventListener('DOMContentLoaded', e => {
+    //will be fired by browser when HTML content has been loaded, when it's 
+    //done reading the files
+    console.log('loading...')
+    // Set the product reviews page title.
+    setPageTitle();
+    // Set the product reviews page description.
+    setPageDescription();
+    // Display all of the product reviews on our page.
+    displayReviews();
+    //done in here because then we will know that all events are there
+    setupDescriptionEdit();
+
+    const toggleFormButton = document.getElementById('btnToggleForm');
+    toggleFormButton.addEventListener('click', e => {
+        showHideForm();
+    });
+
+    const saveButton = document.getElementById('btnSaveReview');
+    saveButton.addEventListener('click', e => {
+        saveReview();
+        e.preventDefault();
+    });
+
+});
+
+function setupDescriptionEdit() {
+    const desc = document.querySelector('.description');
+    desc.addEventListener('click', e => {
+        //call toggleDescriptionEdit with reference to the p tag
+        toggleDescriptionEdit(e.target);
+    });
+
+    const inputDesc = document.getElementById('inputDesc');
+    inputDesc.addEventListener('keyup', e => {
+        if (e.key === 'Enter') {
+            exitDescriptionEdit(e.target, true);
+        }
+        if (e.key === 'Escape') {
+            exitDescriptionEdit(e.target, false);
+        }
+    });
+
+    inputDesc.addEventListener('mouseleave', e => {
+        exitDescriptionEdit(e.target, false);
+    });
+}
 
 /**
  * Hide the description and show the text box.
@@ -130,4 +171,15 @@ function resetFormValues() {
 /**
  * Save the review that was added using the add review form.
  */
-function saveReview() { }
+function saveReview() {
+    const review = {
+        reviewer: document.getElementById('name').value,
+        title: document.getElementById('title').value,
+        review: document.getElementById('review').value,
+        rating: document.getElementById('rating').value
+    }
+
+    reviews.push(review);
+    displayReview(review);
+    showHideForm();
+}
