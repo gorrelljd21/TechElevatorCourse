@@ -158,3 +158,13 @@ function findLargest(array) {
  *
  * Read the tests to verify you have the correct behavior.
  */
+
+function getSumOfSubArrayValues(sparseArray) {
+    if (!sparseArray) return 0;
+
+    //set anonymous function into a var
+    const sumArray = (arr) => arr.reduce((acc, element) => acc += element, 0);
+
+    return sparseArray.reduce((acc, arr) => acc += sumArray(arr), 0);
+
+}

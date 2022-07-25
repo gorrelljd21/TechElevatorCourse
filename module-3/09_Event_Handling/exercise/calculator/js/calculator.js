@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', e => {
   // get a reference to the all clear button
   // add a click event listener to call the function clear  
   const allClear = document.querySelector('.all-clear');
-  allClear.addEventListener('click', e => {
+  allClear.addEventListener('click', () => {
     clear();
   });
 

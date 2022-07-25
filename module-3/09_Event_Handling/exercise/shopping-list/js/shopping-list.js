@@ -38,11 +38,15 @@ document.addEventListener('DOMContentLoaded', e => {
   button.addEventListener('click', () => {
     if (allItemsIncomplete) {
       allItemsIncomplete = false;
-      items.forEach((item) => { item.classList.add('completed') });
+      items.forEach((item) => {
+        item.classList.add('completed')
+      });
       button.innerText = 'Mark All Incomplete';
     } else {
       allItemsIncomplete = true;
-      items.forEach((item) => { item.classList.remove('completed') });
+      items.forEach((item) => {
+        item.classList.remove('completed')
+      });
       button.innerText = 'Mark All Complete';
     }
   });
