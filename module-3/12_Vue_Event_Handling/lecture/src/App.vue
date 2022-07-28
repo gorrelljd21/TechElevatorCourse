@@ -11,8 +11,8 @@ import ProductReview from "./components/ProductReview.vue";
 export default {
   name: "app",
   components: {
-    ProductReview
-  }
+    ProductReview,
+  },
 };
 </script>
 
