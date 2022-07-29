@@ -96,22 +96,22 @@
     <form id="frmAddNewUser" v-show="showForm">
       <div class="field">
         <label for="firstName">First Name:</label>
-        <input type="text" name="firstName" v.model.trim="newUser.firstName" />
+        <input type="text" name="firstName" v-model.trim="newUser.firstName" />
       </div>
       <div class="field">
         <label for="lastName">Last Name:</label>
-        <input type="text" name="lastName" v.model.trim="newUser.lastName" />
+        <input type="text" name="lastName" v-model.trim="newUser.lastName" />
       </div>
       <div class="field">
         <label for="username">Username:</label>
-        <input type="text" name="username" v.model.trim="newUser.username" />
+        <input type="text" name="username" v-model.trim="newUser.username" />
       </div>
       <div class="field">
         <label for="emailAddress">Email Address:</label>
         <input
           type="text"
           name="emailAddress"
-          v.model.trim="newUser.emailAddress"
+          v-model.trim="newUser.emailAddress"
         />
       </div>
       <button type="submit" class="btn save" v-on:click.prevent="saveUser">
