@@ -58,5 +58,13 @@ export default new Vuex.Store({
     },
     modules: {
     },
+    getters: {
+        filteredReviews(state) {
+            const reviewsFilter = state.filter;
+            return state.reviews.filter((review) => {
+                return reviewsFilter === 0 ? true : reviewsFilter === review.rating;
+            });
+        },
+    },
     strict: true
 })

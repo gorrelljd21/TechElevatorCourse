@@ -21,21 +21,21 @@
 </template>
 
 <script>
-import boardsService from '../services/BoardService';
+import boardsService from "../services/BoardService";
 
 export default {
   data() {
     return {
       boards: [],
-      isLoading: true
+      isLoading: true,
     };
   },
   created() {
-    boardsService.getBoards().then(response => {
-      this.boards = response.data;
+    boardsService.getBoards().then((response) => {
+      this.boards = response.data; //don't want response obj, want data from it
       this.isLoading = false;
     });
-  }
+  },
 };
 </script>
 

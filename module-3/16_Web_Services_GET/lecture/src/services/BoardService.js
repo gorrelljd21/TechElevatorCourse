@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-const http = axios.create({
+const http = axios.create({ //same role as RestTemplate, messaging gateway
   baseURL: "http://localhost:3000"
 });
 
 export default {
 
   getBoards() {
-    return http.get('/boards');
+    return http.get('/boards'); //axios handles attaching this to baseURL
   },
 
   getCards(boardID) {
@@ -20,5 +20,4 @@ export default {
       return cards.find(card => card.id == cardID);
     })
   }
-
 }

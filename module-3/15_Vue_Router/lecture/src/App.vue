@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <router-view></router-view>
+  <!-- spot in single page application we will dyn change content
+  component that does that. The host that will display the content -->
 </template>
 
 <script>

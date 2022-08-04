@@ -21,11 +21,6 @@
 export default {
   name: "book-card",
   props: ["book"],
-  data() {
-    return {
-      showButton: false,
-    };
-  },
   methods: {
     changeStatus() {
       this.$store.commit("FLIP_READ_STATUS", this.book);
