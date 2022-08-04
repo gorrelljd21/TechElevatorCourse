@@ -11,7 +11,7 @@ export default {
   },
 
   get(id) {
-    return http.get(`/docs/${id}`)
+    return http.get(`/docs/${id}`);
   }
 
 }

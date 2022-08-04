@@ -1,28 +1,55 @@
 <template>
   <div>
     <div class="header">
-      <h1>{{ title }}</h1>
+      <div>
+        <div v-if="!isTitleEdit">
+          <h1>{{ title }}</h1>
+          <button @click="isTitleEdit = true">Edit</button>
+        </div>
+        <div v-if="isTitleEdit">
+          <input type="text" v-model="newTitle" />
+          <button @click="updateTitle">Save</button>
+          <button @click="isTitleEdit = false">Cancel</button>
+        </div>
+      </div>
       <router-link
         tag="button"
         class="btn addNewCard"
-        :to="{ name: 'AddCard', params: {boardID: this.boardId} }"
+        :to="{ name: 'AddCard', params: { boardID: this.boardId } }"
         v-if="!isLoading"
-      >Add New Card</router-link>
+        >Add New Card</router-link
+      >
       <button
         class="btn btn-cancel deleteBoard"
         v-if="!isLoading"
         v-on:click="deleteBoard"
-      >Delete Board</button>
+      >
+        Delete Board
+      </button>
     </div>
     <div class="loading" v-if="isLoading">
       <img src="../assets/ping_pong_loader.gif" />
     </div>
     <div v-else>
-      <div class="status-message error" v-show="errorMsg !== ''">{{errorMsg}}</div>
+      <div class="status-message error" v-show="errorMsg !== ''">
+        {{ errorMsg }}
+      </div>
       <div class="boards">
-        <board-column title="Planned" :cards="planned" :boardID="this.boardId" />
-        <board-column title="In Progress" :cards="inProgress" :boardID="this.boardId" />
-        <board-column title="Completed" :cards="completed" :boardID="this.boardId" />
+        <board-column
+          title="Planned"
+          :cards="planned"
+          :boardID="this.boardId"
+        />
+        <board-column
+          title="In Progress"
+          :cards="inProgress"
+          :boardID="this.boardId"
+        />
+        <board-column
+          title="Completed"
+          :cards="completed"
+          :boardID="this.boardId"
+        />
       </div>
     </div>
   </div>
@@ -35,42 +62,78 @@ import BoardColumn from "@/components/BoardColumn";
 export default {
   name: "cards-list",
   components: {
-    BoardColumn
+    BoardColumn,
   },
   props: {
     boardId: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   data() {
     return {
       title: "",
+      newTitle: "",
       isLoading: true,
-      errorMsg: ""
+      errorMsg: "",
+      isTitleEdit: false,
     };
   },
   methods: {
     retrieveCards() {
       boardsService
         .getCards(this.boardId)
-        .then(response => {
+        .then((response) => {
           this.title = response.data.title;
           this.$store.commit("SET_BOARD_CARDS", response.data.cards);
           this.isLoading = false;
         })
-        .catch(error => {
+        .catch((error) => {
           if (error.response && error.response.status === 404) {
             alert(
               "Board cards not available. This board may have been deleted or you have entered an invalid board ID."
             );
-            this.$router.push({ name: 'Home' });
+            this.$router.push({ name: "Home" });
           }
         });
     },
     deleteBoard() {
-      
-    }
+      if (
+        !confirm(
+          "Are you sure that you want to remove this board? Action cannot be undone."
+        )
+      ) {
+        return;
+      }
+      boardsService
+        .deleteBoard(this.boardId)
+        .then((response) => {
+          if (response.status === 200) {
+            alert("Board has been deleted.");
+            this.$store.commit("DELETE_BOARD", this.boardId);
+            this.$router.push({ name: "Home" });
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+            this.errorMsg =
+              "Error deleting board. Response received was '" +
+              error.response.statusText +
+              "'.";
+          } else if (error.request) {
+            this.errorMsg =
+              "Error deleting board. Server could not be reached.";
+          } else {
+            this.errorMsg =
+              "Error deleting board. Request could not be created.";
+          }
+        });
+    },
+    updateTitle() {
+      this.title = this.newTitle;
+      boardsService.updateBoard();
+      this.isTitleEdit = false;
+    },
   },
   created() {
     this.retrieveCards();
@@ -78,20 +141,23 @@ export default {
   computed: {
     planned() {
       return this.$store.state.boardCards.filter(
-        card => card.status === "Planned"
+        (card) => card.status === "Planned"
       );
     },
     inProgress() {
       return this.$store.state.boardCards.filter(
-        card => card.status === "In Progress"
+        (card) => card.status === "In Progress"
       );
     },
     completed() {
       return this.$store.state.boardCards.filter(
-        card => card.status === "Completed"
+        (card) => card.status === "Completed"
       );
-    }
-  }
+    },
+    board() {
+      return this.$store.state.boards.find((b) => (b.id = this.boardId));
+    },
+  },
 };
 </script>
 
